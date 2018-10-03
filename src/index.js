@@ -61,25 +61,21 @@ class SmartCalculator {
 
   calculate() {
     let a = this.values.pop(), b = this.values.pop();
+    let operator = this.operators.pop();
 
-    if (this.operators[this.operators.length - 1] === "+") {
-      this.operators.pop();
+    if (operator === "+") {
       this.values.push(a + b);
     }
-    if (this.operators[this.operators.length - 1] === "-") {
-      this.operators.pop();
+    if (operator === "-") {
       this.values.push(b - a);
     }
-    if (this.operators[this.operators.length - 1] === "*") {
-      this.operators.pop();
+    if (operator === "*") {
       this.values.push(a * b);
     }
-    if (this.operators[this.operators.length - 1] === "/") {
-      this.operators.pop();
+    if (operator === "/") {
       this.values.push(b / a);
     }
-    if (this.operators[this.operators.length - 1] === "^") {
-      this.operators.pop();
+    if (operator === "^") {
       this.values.push(Math.pow(b, a));
     }
   }
