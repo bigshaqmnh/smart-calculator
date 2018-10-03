@@ -1,26 +1,95 @@
 class SmartCalculator {
   constructor(initialValue) {
-    // your implementation
+    this.values = [initialValue];
+    this.operators = [];
   }
 
   add(number) {
-    // your implementation
+    while (this.operators.length) {
+      this.calculate();
+    }
+
+    this.operators.push("+");
+    this.values.push(number); 
+
+    return this;
   }
   
   subtract(number) {
-    // your implementation
+    while (this.operators.length) {
+      this.calculate();
+    }
+
+    this.operators.push("-");
+    this.values.push(number); 
+
+    return this;
   }
 
   multiply(number) {
-    // your implementation
+    while (this.operators[this.operators.length - 1] === "*"
+          || this.operators[this.operators.length - 1] === "/"
+          || this.operators[this.operators.length - 1] === "^") {
+      this.calculate();
+    }
+
+    this.operators.push("*");
+    this.values.push(number);
+
+    return this;
   }
 
   devide(number) {
-    // your implementation
+    while (this.operators[this.operators.length - 1] === "*"
+          || this.operators[this.operators.length - 1] === "/"
+          || this.operators[this.operators.length - 1] === "^") {
+      this.calculate();
+    }
+
+    this.operators.push("/");
+    this.values.push(number);
+
+    return this;
   }
 
   pow(number) {
-    // your implementation
+    this.operators.push("^");
+    this.values.push(number);
+
+    return this;
+  }
+
+  calculate() {
+    let a = this.values.pop(), b = this.values.pop();
+
+    if (this.operators[this.operators.length - 1] === "+") {
+      this.operators.pop();
+      this.values.push(a + b);
+    }
+    if (this.operators[this.operators.length - 1] === "-") {
+      this.operators.pop();
+      this.values.push(b - a);
+    }
+    if (this.operators[this.operators.length - 1] === "*") {
+      this.operators.pop();
+      this.values.push(a * b);
+    }
+    if (this.operators[this.operators.length - 1] === "/") {
+      this.operators.pop();
+      this.values.push(b / a);
+    }
+    if (this.operators[this.operators.length - 1] === "^") {
+      this.operators.pop();
+      this.values.push(Math.pow(b, a));
+    }
+  }
+
+  toString() {
+    while (this.values.length > 1) {
+      this.calculate();
+    }
+
+    return this.values.pop();
   }
 }
 
